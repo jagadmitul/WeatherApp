@@ -1,25 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { StyleSheet, View, Text, FlatList, ImageBackground } from 'react-native'
 import { upcomingWeather } from '../../data/dummy-weather'
-import { Feather } from '@expo/vector-icons'
-
-const Item = (props) => {
-  const { dt_text, min, max, condition } = props
-
-  return (
-    <View style={styles.item}>
-      <Feather name="sun" size={50} color="white" />
-      <Text style={styles.date}>{dt_text}</Text>
-      <Text style={styles.temp}>{min}</Text>
-      <Text style={styles.temp}>{max}</Text>
-    </View>
-  )
-}
+import ListItem from '../components/ListItem'
 
 const UpcomingWeather = () => {
   const renderItem = ({ item }) => {
     return (
-      <Item
+      <ListItem
         dt_text={item.dt_txt}
         min={item.main.temp_min}
         max={item.main.temp_max}
@@ -28,18 +15,24 @@ const UpcomingWeather = () => {
     )
   }
 
+  const { image, container } = styles
+
   return (
-    <View style={styles.container}>
-      <Text>Upcoming Weather</Text>
-      <FlatList data={upcomingWeather} renderItem={renderItem} />
-    </View>
+    <ImageBackground
+      source={require('../../assets/upcoming-background-1.jpg')}
+      style={image}
+    >
+      <View style={container}>
+        <Text>Upcoming Weather</Text>
+        <FlatList data={upcomingWeather} renderItem={renderItem} />
+      </View>
+    </ImageBackground>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'red'
+    flex: 1
   },
   item: {
     padding: 20,
@@ -48,8 +41,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderWidth: 5,
-    backgroundColor: 'pink'
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'royalblue'
   },
   date: {
     color: 'white',
@@ -58,6 +52,9 @@ const styles = StyleSheet.create({
   temp: {
     color: 'white',
     fontSize: 15
+  },
+  image: {
+    flex: 1
   }
 })
 

@@ -3,6 +3,10 @@
     "name": "WeatherApp",
     "slug": "WeatherApp",
     "version": "1.0.0",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
