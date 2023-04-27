@@ -1,37 +1,57 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import RowText from '../components/RowText'
 
 const CurrentWeather = () => {
+  const {
+    wrapper,
+    container,
+    temperature,
+    feels,
+    highLowWrapper,
+    highLow,
+    bodyWrapper,
+    description,
+    message
+  } = styles
+
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.container}>
+    <View style={wrapper}>
+      <View style={container}>
         <Feather name="sun" size={100} color="black" />
-        <Text style={styles.temp}>6</Text>
-        <Text style={styles.feels}>Feels like 5</Text>
-        <View style={styles.highLowWrapper}>
-          <Text style={styles.highLow}>High: 8</Text>
-          <Text style={styles.highLow}>Low: 6</Text>
-        </View>
+        <Text style={temperature}>6</Text>
+        <Text style={feels}>Feels like 5</Text>
+        <RowText
+          messageOne={`High: 8° `}
+          messageTwo={`Low: 6°`}
+          containerStyles={highLowWrapper}
+          messageOneStyles={highLow}
+          messageTwoStyles={highLow}
+        />
       </View>
-      <View style={styles.bodyWrapper}>
-        <Text style={styles.description}>It's sunny</Text>
-        <Text style={styles.message}>It's perfect t-shirt weather</Text>
-      </View>
+      <RowText
+        messageOne={`It's sunny`}
+        messageTwo={`It's perfect t-shirt weather`}
+        containerStyles={bodyWrapper}
+        messageOneStyles={description}
+        messageTwoStyles={message}
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'pink'
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  temp: {
+  temperature: {
     fontSize: 48
   },
   feels: {
