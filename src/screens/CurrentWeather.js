@@ -2,8 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import RowText from '../components/RowText'
+import { weatherType } from '../utilities/weatherType'
 
-const CurrentWeather = () => {
+const CurrentWeather = ({ weatherData }) => {
   const {
     wrapper,
     container,
@@ -16,23 +17,38 @@ const CurrentWeather = () => {
     message
   } = styles
 
+  const {
+    main: { temp, feels_like, temp_max, temp_min },
+    weather
+  } = weatherData
+  const weatherCondition = weather[0]?.main
+
   return (
-    <View style={wrapper}>
+    <View
+      style={[
+        wrapper,
+        { backgroundColor: weatherType[weatherCondition]?.backgroundColor }
+      ]}
+    >
       <View style={container}>
-        <Feather name="sun" size={100} color="black" />
-        <Text style={temperature}>6</Text>
-        <Text style={feels}>Feels like 5</Text>
+        <Feather
+          name={weatherType[weatherCondition]?.icon}
+          size={100}
+          color="white"
+        />
+        <Text style={temperature}>{`${temp}°`}</Text>
+        <Text style={feels}>{`Feels like ${feels_like}°`}</Text>
         <RowText
-          messageOne={`High: 8° `}
-          messageTwo={`Low: 6°`}
+          messageOne={`High: ${temp_max}° `}
+          messageTwo={`Low: ${temp_min}°`}
           containerStyles={highLowWrapper}
           messageOneStyles={highLow}
           messageTwoStyles={highLow}
         />
       </View>
       <RowText
-        messageOne={`It's sunny`}
-        messageTwo={`It's perfect t-shirt weather`}
+        messageOne={weather[0]?.description}
+        messageTwo={weatherType[weatherCondition]?.message}
         containerStyles={bodyWrapper}
         messageOneStyles={description}
         messageTwoStyles={message}
@@ -44,6 +60,7 @@ const CurrentWeather = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    opacity: 0.5,
     backgroundColor: 'pink'
   },
   container: {
@@ -64,16 +81,15 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   bodyWrapper: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    paddingLeft: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 40
   },
   description: {
-    fontSize: 48
+    fontSize: 35
   },
   message: {
-    fontSize: 30
+    fontSize: 20
   }
 })
 

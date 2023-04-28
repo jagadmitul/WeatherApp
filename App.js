@@ -1,40 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 import {
   ActivityIndicator,
   Platform,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   View
 } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import Tabs from './src/components/Tabs'
-import * as Location from 'expo-location'
-import { OPEN_WEATHER_API_KEY } from '@env'
 import { useGetWeather } from './src/hooks/useGetWeather'
+import ErrorItem from './src/components/ErrorItem'
 
 const App = () => {
   const [loading, error, weather] = useGetWeather()
 
-  console.log(weather)
-  console.log(loading)
-  console.log(error)
-
-  if (loading) {
+  if (weather && weather.list && !loading) {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="blue" />
-      </View>
-    )
-  }
-  return (
-    <SafeAreaView style={styles.wrapper}>
       <NavigationContainer>
-        <Tabs />
+        <Tabs weather={weather} />
         <ExpoStatusBar style="auto" />
       </NavigationContainer>
-    </SafeAreaView>
+    )
+  }
+
+  return (
+    <View style={styles.container}>
+      {error ? (
+        <ErrorItem error={error} />
+      ) : (
+        <ActivityIndicator size="large" color="blue" />
+      )}
+    </View>
   )
 }
 

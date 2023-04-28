@@ -1,19 +1,22 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import { weatherType } from '../utilities/weatherType'
+import dayjs from 'dayjs'
 
 const ListItem = (props) => {
-  const { dt_text, min, max, condition } = props
-
-  const { item, date, temp } = styles
+  const { dt_txt, min, max, condition } = props
+  const { item, date, temp, dateTextWrapper } = styles
 
   return (
-    <View style={item}>
-      <Feather name="sun" size={50} color="white" />
-      <Text style={date}>{dt_text}</Text>
-      <Text style={temp}>{min}</Text>
-      <Text style={temp}>{max}</Text>
-    </View>
+    <TouchableOpacity style={item}>
+      <Feather name={weatherType[condition]?.icon} size={50} color={'white'} />
+      <View style={dateTextWrapper}>
+        <Text style={date}>{dayjs(dt_txt).format('dddd')}</Text>
+        <Text style={date}>{dayjs(dt_txt).format('hh:mm:ss A')}</Text>
+      </View>
+      <Text style={temp}>{`${Math.round(min)}° / ${Math.round(max)}°`}</Text>
+    </TouchableOpacity>
   )
 }
 
@@ -26,16 +29,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: 'royalblue'
+    backgroundColor: 'indianred'
+  },
+  temp: {
+    color: 'white',
+    fontSize: 20
   },
   date: {
     color: 'white',
     fontSize: 15
   },
-  temp: {
-    color: 'white',
-    fontSize: 15
+  dateTextWrapper: {
+    flexDirection: 'column'
   }
 })
 

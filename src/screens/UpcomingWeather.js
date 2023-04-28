@@ -3,11 +3,11 @@ import { StyleSheet, View, Text, FlatList, ImageBackground } from 'react-native'
 import { upcomingWeather } from '../../data/dummy-weather'
 import ListItem from '../components/ListItem'
 
-const UpcomingWeather = () => {
+const UpcomingWeather = ({ weatherData }) => {
   const renderItem = ({ item }) => {
     return (
       <ListItem
-        dt_text={item.dt_txt}
+        dt_txt={item.dt_txt}
         min={item.main.temp_min}
         max={item.main.temp_max}
         condition={item.weather[0].main}
@@ -18,15 +18,14 @@ const UpcomingWeather = () => {
   const { image, container } = styles
 
   return (
-    <ImageBackground
-      source={require('../../assets/upcoming-background-1.jpg')}
-      style={image}
-    >
-      <View style={container}>
-        <Text>Upcoming Weather</Text>
-        <FlatList data={upcomingWeather} renderItem={renderItem} />
-      </View>
-    </ImageBackground>
+    <View style={container}>
+      <ImageBackground
+        source={require('../../assets/upcoming-background-1.jpg')}
+        style={image}
+      >
+        <FlatList data={weatherData} renderItem={renderItem} />
+      </ImageBackground>
+    </View>
   )
 }
 

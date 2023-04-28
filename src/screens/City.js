@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Text, ImageBackground } from 'react-native'
 import IconText from '../components/IconText'
+import dayjs from 'dayjs'
 
-const City = () => {
+const City = ({ weatherData }) => {
   const {
     cityName,
     cityText,
@@ -15,18 +16,20 @@ const City = () => {
     rowLayout
   } = styles
 
+  const { name, country, population, sunrise, sunset } = weatherData
+
   return (
     <ImageBackground
       source={require('../../assets/city-background.jpg')}
       style={imageLayout}
     >
-      <Text style={[cityName, cityText]}>Surat</Text>
-      <Text style={[countryName, cityText]}>Ahmedabad</Text>
+      <Text style={[cityName, cityText]}>{name}</Text>
+      <Text style={[countryName, cityText]}>{country}</Text>
       <View style={[populationWrapper, rowLayout]}>
         <IconText
           iconName={'user'}
           iconColor={'red'}
-          bodyText={`Population: `}
+          bodyText={`Population: ${population}`}
           bodyTextStyles={populationText}
         />
       </View>
@@ -34,13 +37,13 @@ const City = () => {
         <IconText
           iconName={'sunrise'}
           iconColor={'white'}
-          bodyText="10:46:58AM"
+          bodyText={dayjs.unix(sunrise).format('hh:mm:ss A')}
           bodyTextStyles={riseSetText}
         />
         <IconText
           iconName={'sunset'}
           iconColor={'white'}
-          bodyText="17:19:58PM"
+          bodyText={dayjs.unix(sunset).format('hh:mm:ss A')}
           bodyTextStyles={riseSetText}
         />
       </View>
