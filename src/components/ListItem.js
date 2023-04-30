@@ -10,7 +10,7 @@ const ListItem = (props) => {
 
   return (
     <TouchableOpacity style={item}>
-      <Feather name={weatherType[condition]?.icon} size={50} color={'white'} />
+      <Feather name={weatherType[condition]?.icon} size={50} color={'black'} />
       <View style={dateTextWrapper}>
         <Text style={date}>{dayjs(dt_txt).format('dddd')}</Text>
         <Text style={date}>{dayjs(dt_txt).format('hh:mm:ss A')}</Text>
@@ -28,15 +28,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderWidth: 1,
-    backgroundColor: 'indianred'
+    borderRadius: 15,
+    backgroundColor: 'white'
   },
   temp: {
-    color: 'white',
+    color: 'black',
     fontSize: 20
   },
   date: {
-    color: 'white',
+    color: 'black',
     fontSize: 15
   },
   dateTextWrapper: {

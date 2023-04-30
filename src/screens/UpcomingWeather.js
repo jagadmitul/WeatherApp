@@ -19,19 +19,20 @@ const UpcomingWeather = ({ weatherData }) => {
 
   return (
     <View style={container}>
-      <ImageBackground
+      {/* <ImageBackground
         source={require('../../assets/upcoming-background-1.jpg')}
         style={image}
-      >
+      > */}
         <FlatList data={weatherData} renderItem={renderItem} />
-      </ImageBackground>
+      {/* </ImageBackground> */}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'lightskyblue'
   },
   item: {
     padding: 20,

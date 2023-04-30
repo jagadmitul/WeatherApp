@@ -3,11 +3,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import RowText from '../components/RowText'
 import { weatherType } from '../utilities/weatherType'
+import dayjs from 'dayjs'
 
 const CurrentWeather = ({ weatherData }) => {
   const {
     wrapper,
     container,
+    currentDate,
     temperature,
     feels,
     highLowWrapper,
@@ -25,12 +27,12 @@ const CurrentWeather = ({ weatherData }) => {
 
   return (
     <View
-      style={[
-        wrapper,
-        { backgroundColor: weatherType[weatherCondition]?.backgroundColor }
-      ]}
+      style={
+        wrapper
+      }
     >
       <View style={container}>
+        <Text style={currentDate}>{dayjs().format('dddd, MMMM DD')}</Text>
         <Feather
           name={weatherType[weatherCondition]?.icon}
           size={100}
@@ -60,13 +62,16 @@ const CurrentWeather = ({ weatherData }) => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    opacity: 0.5,
-    backgroundColor: 'pink'
+    backgroundColor: 'lightgreen'
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  currentDate: {
+    fontSize: 40,
+    marginBottom: 5
   },
   temperature: {
     fontSize: 48

@@ -19,10 +19,11 @@ const City = ({ weatherData }) => {
   const { name, country, population, sunrise, sunset } = weatherData
 
   return (
-    <ImageBackground
-      source={require('../../assets/city-background.jpg')}
-      style={imageLayout}
-    >
+    <View style={imageLayout}>
+    {/* // <ImageBackground
+    //   source={require('../../assets/city-background.jpg')}
+    //   style={imageLayout}
+    // > */}
       <Text style={[cityName, cityText]}>{name}</Text>
       <Text style={[countryName, cityText]}>{country}</Text>
       <View style={[populationWrapper, rowLayout]}>
@@ -47,13 +48,15 @@ const City = ({ weatherData }) => {
           bodyTextStyles={riseSetText}
         />
       </View>
-    </ImageBackground>
+    {/* </ImageBackground> */}
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   imageLayout: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'orange'
   },
   cityName: {
     fontSize: 40

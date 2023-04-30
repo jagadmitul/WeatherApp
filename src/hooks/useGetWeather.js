@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as Location from 'expo-location'
-import { OPEN_WEATHER_API_KEY } from '@env'
+import { WEATHER_API_KEY } from '@env'
 
 export const useGetWeather = () => {
   const [loading, setLoading] = useState(true)
@@ -12,7 +12,7 @@ export const useGetWeather = () => {
   const fetchWeatherData = async () => {
     try {
       const res = await fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${WEATHER_API_KEY}&units=metric`
       )
       const data = await res.json()
       setWeather(data)
